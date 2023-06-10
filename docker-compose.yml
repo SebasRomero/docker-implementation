@@ -1,23 +1,5 @@
 version: "3"
 services:
-  database:
-    image: mysql:latest
-    container_name: database
-    env_file:
-      - .env
-    ports:
-      - 3308:3306
-    restart: always
-    volumes:
-      - ./data:/var/lib/mysql
-
-    networks:
-      - test
-
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      timeout: 5s
-      retries: 10
   node_server:
     build:
       context: .
@@ -26,16 +8,17 @@ services:
       - 8080:8080
     env_file:
       - .env
-
-    volumes:
-      - ./:/app
-
-    networks:
-      - test
+    restart: always
     depends_on:
-      database:
-        condition: service_healthy
-
-networks:
-  test:
-    driver: bridge
+      - database
+  database:
+    image: mysql:8.0
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - 3307:3306
+volumes:
+  db_data:
