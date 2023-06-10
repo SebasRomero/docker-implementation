@@ -1,7 +1,7 @@
-import express, { Request, Response } from "express";
-import mysql from "mysql2";
-import { config } from "dotenv";
-import { StatusCodes } from "http-status-codes";
+const express = require("express")
+const mysql = require("mysql2")
+const { config } = require("dotenv")
+const { StatusCodes } = require("http-status-codes")
 
 config();
 
@@ -24,13 +24,13 @@ connection.connect((err) => {
   }
   console.log("Conexión exitosa a la base de datos");
 });
-console.log("hola")
+console.log("holba")
 // Crear una instancia de Express
 const server = express();
 // Ruta de ejemplo para obtener datos de la base de datos
 server.get(
   "/main",
-  async (request: Request, response: Response): Promise<Response> => {
+  async (request, response) => {
     return response.status(StatusCodes.OK).json({
       status: StatusCodes.OK,
     });
@@ -44,5 +44,5 @@ const port = PORT ?? 3000;
 server.listen(port, () => {
   console.log(`Servidor en ejecución en http://localhost:${port}`);
   console.log("sisdd")
-  console.log("Sascassadasasas");
+  
 });
