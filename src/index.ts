@@ -24,10 +24,9 @@ connection.connect((err) => {
   }
   console.log("Conexión exitosa a la base de datos");
 });
-
+console.log("hola")
 // Crear una instancia de Express
 const server = express();
-
 // Ruta de ejemplo para obtener datos de la base de datos
 server.get(
   "/main",
